@@ -117,7 +117,7 @@ stop() {
         for s in $APACHE_CONFDIRS
         do
         	if [ -d $APACHE_INSTANCES_BASEDIR/$s ]; then
-				killproc -p "${pidfile}-${s}.pid" $httpd
+				$httpd -k stop -d ${APACHE_INSTANCES_BASEDIR}/${s} $OPTIONS
 				RETVALi=$?
 				echo -n "  $s "
 				if [ $RETVALi = 0 ]; then
