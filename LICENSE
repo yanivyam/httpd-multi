@@ -1,3 +1,7 @@
+
+Note: The scripts are based on original apachectl and httpd scripts that are bundled with Apache.
+
+
                                  Apache License
                            Version 2.0, January 2004
                         http://www.apache.org/licenses/
