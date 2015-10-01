@@ -12,19 +12,19 @@ Description
 Multi-Apachectl is a set of scripts that will help you manage multiple instances of Apache 2.2.
 It is distributed under the Apache 2.0 license.
 
-    multi-httpd - is a script that replaces Apache's default init.d script (httpd), and which will automatically start and stop all Apache instances.
-    multi-apachectl - is a replacement script for apachectl that is bundled with Apache. It will allow you to control each Apache instance separately. 
+    httpd-multi - is a script that replaces Apache's default init.d script (httpd), and which will automatically start and stop all Apache instances.
+    apachectl-multi - is a replacement script for apachectl that is bundled with Apache. It will allow you to control each Apache instance separately. 
 
 How to use the scripts
 ----------------------
 
-To control an Apache instance, use multi-apachectl, just like you would use the original apachectl that comes with Apache, but with the server instance's root directory name as the first argument:
+To control an Apache instance, use apachectl-multi, just like you would use the original apachectl that comes with Apache, but with the server instance's root directory name as the first argument:
 
-multi-apachectl www start
+apachectl-multi www start
 
 In this example, the first argument "www" is the Apache instance's ServerRoot directory name (see How to Install the scripts for an example of how to set up the server instances).
 
-The second argument for multi-apachectl is one of the control commands that you would normally use with Apache's apachectl:
+The second argument for apachectl-multi is one of the control commands that you would normally use with Apache's apachectl:
 
     start - start httpd
     stop - stop httpd
@@ -60,28 +60,27 @@ Configure httpd.conf
 
 Configure each instance httpd.conf so paths to the logs, LoadModule, DocumentRoot and other directives will point to the correct locations.
 Install Multi-Apachectl scripts
-First, we'll install the multi-apachectl script, which controls the starting and stopping of Apache.
+First, we'll install the apachectl-multi script, which controls the starting and stopping of Apache.
 
-    Download multi-apachectl.tar.gz by clicking on the download link below.
-    Unzip and untar the file:
+    Download httpd-multi from GitHub:
+    git clone https://github.com/yanivyam/httpd-multi.git
 
-    tar -xzf multi-apachectl.tar.gz
-    Copy the file multi-apachectl into the bin directory of your Apache installation. It should be placed under the same parent directory as Apache's original apachectl script.
+    Copy the file apachectl-multi into the bin directory of your Apache installation. It should be placed under the same parent directory as Apache's original apachectl script.
 
-    cp multi-apachectl /usr/local/apache/bin
-    Copy multi-httpd to your init.d directory (the exact location depends on your Linux/Unix distribution):
+    cp apachectl-multi /usr/local/apache/bin
+    Copy httpd-multi.init to your init.d directory (the exact location depends on your Linux/Unix distribution):
 
-    cp multi-httpd /etc/init.d/
-    Edit the following in multi-apachectl:
+    cp httpd-multi.init /etc/init.d/httpd-multi
+    Edit the following in apachectl-multi:
     HTTPD - set to the path of Apache's binary (httpd).
     APACHE_INSTANCES_BASEDIR - set it to the base directory (see "Create ServerRoot directories" above). 
 
-The next step is to setup multi-httpd, which is the init.d script that is responsible of starting and stopping Apache instanaces during boot and shutdown of the server.
+The next step is to setup httpd-multi, which is the init.d script that is responsible of starting and stopping Apache instanaces during boot and shutdown of the server.
 
-    Setup multi-httpd to run during boot and shutdown of the server.
+    Setup httpd-multi to run during boot and shutdown of the server.
 
-    Usually, this involves copying multi-httpd to your init.d directory, and then use chkconfig utility tell the system when to call the script during boot and shutdown processes.
-    Edit the following in multi-httpd to reflect the paths on your system:
+    Usually, this involves copying httpd-multi to your init.d directory, and then use chkconfig utility tell the system when to call the script during boot and shutdown processes.
+    Edit the following in httpd to reflect the paths on your system:
     httpd - the path to httpd
     pidfile - the path to Apache's PID (process id) file.
     APACHE_INSTANCES_BASEDIR - set it to the base directory (see "Create ServerRoot directories" above). 
